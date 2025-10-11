@@ -1,0 +1,13 @@
+package lexer;
+
+public enum TokenType {
+    // 关键字
+    CONSTTK, INTTK, STATICTK, BREAKTK, CONTINUETK, IFTK, ELSETK, FORTK,
+    RETURNTK, VOIDTK, MAINTK, PRINTFTK,
+    // 运算符和分隔符
+    NOT, AND, OR, PLUS, MINU, MULT, DIV, MOD, LSS, LEQ, GRE, GEQ,
+    EQL, NEQ, ASSIGN, SEMICN, COMMA, LPARENT, RPARENT, LBRACK,
+    RBRACK, LBRACE, RBRACE,
+    // 标识符和常量
+    IDENFR, INTCON, STRCON
+}
