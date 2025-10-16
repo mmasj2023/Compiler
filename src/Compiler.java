@@ -15,16 +15,23 @@ public class Compiler {
             List<Token> tokens = lexer.tokenize(reader);
             reader.close();
 
+            // 检查词法分析阶段是否有错误
+            boolean hasLexicalErrors = errorHandler.hasErrors();
+
             // 输出词法分析结果
-            BufferedWriter lexerWriter = new BufferedWriter(new FileWriter("lexer.txt"));
-            for (Token token : tokens) {
-                lexerWriter.write(token.toString());
-                lexerWriter.newLine();
+            if (!hasLexicalErrors) {
+                BufferedWriter lexerWriter = new BufferedWriter(new FileWriter("lexer.txt"));
+                for (Token token : tokens) {
+                    lexerWriter.write(token.toString());
+                    lexerWriter.newLine();
+                }
+                lexerWriter.close();
             }
-            lexerWriter.close();
 
             // 输出错误信息
-            errorHandler.writeErrorsToFile("error.txt");
+            if (hasLexicalErrors) {
+                errorHandler.writeErrorsToFile("error.txt");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
