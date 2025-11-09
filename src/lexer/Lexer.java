@@ -147,18 +147,14 @@ public class Lexer {
             Token token = new Token(Keyword.getTokenType(singleCharOp), singleCharOp, lineNumber);
             currentCharIndex++;
             return token;
-        } else if (currentChar == '&' || currentChar == '|') {
-            // 处理非法符号错误
-            errorHandler.reportError(lineNumber, "a");
-            currentCharIndex++;
-            return new Token(TokenType.IDENFR, singleCharOp, lineNumber); // 返回一个默认token
         } else {
-            // 报告非法字符错误
-            if (currentChar == '&' || currentChar == '|') {
-                errorHandler.reportError(lineNumber, "a");
-            }
+            Token token = new Token(
+                    currentChar == '&' ? TokenType.AND : TokenType.OR,
+                    singleCharOp,
+                    lineNumber
+            );
             currentCharIndex++;
-            return new Token(TokenType.IDENFR, singleCharOp, lineNumber); // 返回一个默认token
+            return token;
         }
     }
 
